@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domian.Entities.Users
 {
+    [Table("user_role")]
     public class UserRole : Auditable
     {
         [Column("role_name")]
