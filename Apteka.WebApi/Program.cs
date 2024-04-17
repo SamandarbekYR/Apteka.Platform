@@ -1,5 +1,7 @@
 using DataAccesLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreDB")));
+{
+    var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    options.UseNpgsql(connection);
+
+    options.UseNpgsql(connection, b => b.MigrationsAssembly("DataAccesLayer"));
+});
 
 var app = builder.Build();
 
