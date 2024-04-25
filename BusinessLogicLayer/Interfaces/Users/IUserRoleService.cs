@@ -5,6 +5,6 @@ namespace BusinessLogicLayer.Interfaces.Users;
 
 public interface IUserRoleService
 {
-    Task AddUserRoleAsync(AddUserRoleDto userRole);
-    Task<List<UserRole>> GetAll();
+    void AddUserRole(AddUserRoleDto userRole);
+    List<UserRole> GetAll();
 }

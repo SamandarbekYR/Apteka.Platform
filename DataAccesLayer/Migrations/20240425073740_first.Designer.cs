@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240417105710_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240425073740_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,7 +310,7 @@ namespace DataAccesLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("user_role");
                 });
 
             modelBuilder.Entity("Domian.Entities.Products.Product", b =>

@@ -1,22 +1,33 @@
 ﻿using BusinessLogicLayer.DTOs.Users;
 using BusinessLogicLayer.Interfaces.Users;
+using DataAccesLayer.Interfaces;
 using Domian.Entities.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogicLayer.Services.Users;
 
 public class UserRoleService : IUserRoleService
 {
-    public UserRoleService()
+    private IUnitOfWork _dtSet;
+
+    public UserRoleService(IUnitOfWork unitOfWork)
     {
-        
+        _dtSet = unitOfWork;
     }
-    public Task AddUserRoleAsync(AddUserRoleDto userRole)
+    public void AddUserRole(AddUserRoleDto userRole)
     {
-        throw new NotImplementedException();
+        UserRole role = new UserRole();
+        role.CreatedAt = DateTime.UtcNow;
+        role.UpdatedAt = DateTime.UtcNow;
+        role.RoleName = userRole.RoleName;
+        _dtSet.UserRole.Add(role);
     }
 
-    public Task<List<UserRole>> GetAll()
+    public List<UserRole> GetAll()
     {
-        throw new NotImplementedException();
+        return _dtSet.UserRole.GetAll()
+                              .Include(c => c.User)
+                              .AsNoTracking()
+                              .ToList();
     }
 }
