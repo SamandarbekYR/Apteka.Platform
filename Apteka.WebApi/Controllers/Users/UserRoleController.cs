@@ -22,7 +22,15 @@ namespace Apteka.WebApi.Controllers.Users
         [HttpPost]
         public IActionResult Add(AddUserRoleDto dto)
         {
-            _userRoleSet.AddUserRole(dto);
+            _userRoleSet.Add(dto);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult Update(AddUserRoleDto userDto, Guid Id)
+        {
+            _userRoleSet.Update(userDto, Id);
 
             return Ok();
         }
