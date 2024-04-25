@@ -32,9 +32,9 @@ public class Repository<TEntity> : IRepository<TEntity>
         return _appDb.SaveChanges();
     }
 
-    public Task<List<TEntity>> GetAll()
+    public  IQueryable<TEntity> GetAll()
     {
-        return _dbSet.ToListAsync();
+        return _dbSet;
     }
 
     public TEntity? GetById(Guid id)

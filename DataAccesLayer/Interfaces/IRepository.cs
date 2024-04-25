@@ -9,5 +9,5 @@ public interface IRepository<TEntity>
     int Update(TEntity entity);
     int Remove(TEntity entity);
     TEntity? GetById(Guid id);
-    Task<List<TEntity>> GetAll();
+    IQueryable<TEntity> GetAll();
 }

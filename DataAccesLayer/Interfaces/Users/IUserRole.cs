@@ -9,5 +9,7 @@ using System.Threading.Tasks;
 namespace DataAccesLayer.Interfaces.Users
 {
     public interface IUserRole : IRepository<UserRole>
-    { }
+    {
+        List<UserRole> SelectAll();
+    }
 }

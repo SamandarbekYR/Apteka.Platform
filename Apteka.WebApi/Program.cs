@@ -1,4 +1,9 @@
+using BusinessLogicLayer.Interfaces.Users;
+using BusinessLogicLayer.Services.Users;
 using DataAccesLayer.Data;
+using DataAccesLayer.Interfaces;
+using DataAccesLayer.Interfaces.Users;
+using DataAccesLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -11,6 +16,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IUserRoleService, UserRoleService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var connection = builder.Configuration.GetConnectionString("DefaultConnection");

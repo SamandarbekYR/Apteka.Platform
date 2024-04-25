@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domian.Entities.Users;
@@ -15,5 +16,6 @@ public class User : Auditable
     public string PasswordHash {  get; set; } = string.Empty;
     public string PasswordSalt {  get; set; } = string.Empty;
     public Guid RoleId { get; set; }
-    public UserRole Role { get; set; } = new();
+    [JsonIgnore]
+    public UserRole Role { get; set; } 
 }

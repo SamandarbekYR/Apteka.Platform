@@ -29,7 +29,7 @@ public class AppDbContext : DbContext
             entity.HasOne(u => u.Role)
                   .WithMany(ur => ur.User)
                   .HasForeignKey(u => u.RoleId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -37,7 +37,7 @@ public class AppDbContext : DbContext
             entity.HasOne(p => p.Category)
                   .WithMany(ur => ur.Products)
                   .HasForeignKey(e => e.CategoryId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<ProductItem>(entity =>
@@ -45,7 +45,7 @@ public class AppDbContext : DbContext
             entity.HasOne(p => p.Product)
                   .WithMany(e => e.ProductItems)
                   .HasForeignKey(e => e.ProductId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(p => p.Branch)
                   .WithMany(e => e.ProductItems)
@@ -58,7 +58,7 @@ public class AppDbContext : DbContext
             entity.HasOne(e => e.Branch)
                   .WithMany(e => e.Receipts)
                   .HasForeignKey(e => e.BranchId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<ReceiptItems>(entity =>
@@ -66,12 +66,12 @@ public class AppDbContext : DbContext
             entity.HasOne(e => e.Receipt)
                   .WithMany(e => e.ReceiptItems)
                   .HasForeignKey (e => e.ReceiptId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne(e => e.Product)
                   .WithMany(e => e.ReceiptItems)
                   .HasForeignKey(e => e.ProductId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
         base.OnModelCreating(modelBuilder);

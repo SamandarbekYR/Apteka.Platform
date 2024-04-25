@@ -12,6 +12,6 @@ namespace Domian.Entities.Users
     {
         [Column("role_name")]
         public string RoleName { get; set; } = string.Empty;
-        public List<User> User { get; set; } = new();
+        public List<User> User { get; set; } 
     }
 }
