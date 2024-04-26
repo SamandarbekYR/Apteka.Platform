@@ -5,9 +5,9 @@ namespace BusinessLogicLayer.Interfaces.Users;
 
 public interface IUserRoleService
 {
-    void Add(AddUserRoleDto userRole);
+    bool Add(AddUserRoleDto userRole);
     List<UserRole> GetAll();
-    void Update(AddUserRoleDto userRole, Guid Id);
-    void Remove(Guid Id);
+    bool Update(AddUserRoleDto userRole, Guid Id);
+    bool Remove(Guid Id);
 
 }
