@@ -1,16 +1,10 @@
 ﻿using BusinessLogicLayer.DTOs.Users;
-using Domian.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessLogicLayer.Views.Users;
 
-namespace BusinessLogicLayer.Interfaces.Users
+namespace BusinessLogicLayer.Interfaces.Users;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        void AddUser(AddUserDto userDto);
-        List<User> GetAll();
-    }
+    void AddUser(AddUserDto userDto);
+    List<UserView> GetAll();
 }

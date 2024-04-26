@@ -2,6 +2,7 @@
 using BusinessLogicLayer.DTOs.Users;
 using BusinessLogicLayer.Helper;
 using BusinessLogicLayer.Interfaces.Users;
+using BusinessLogicLayer.Views.Users;
 using DataAccesLayer.Interfaces;
 using Domian.Entities.Users;
 using System;
@@ -36,9 +37,11 @@ namespace BusinessLogicLayer.Services.Users
             _userSet.User.Add(user);
         }
 
-        public List<User> GetAll()
+        public List<UserView> GetAll()
         {
-            return _userSet.User.SelectAll();
+            var users = _userSet.User.SelectAll();
+
+            return users.Select(i => (UserView)i).ToList();
         }
     }
 }

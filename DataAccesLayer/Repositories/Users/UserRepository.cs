@@ -16,7 +16,7 @@ namespace DataAccesLayer.Repositories.Users
         public AppDbContext _appDb = appDb;
         public List<User> SelectAll()
         {
-            return _appDb.Users.AsNoTracking().ToList();
+            return _appDb.Users.Include(i => i.Role).AsNoTracking().ToList();
         }
     }
 }
