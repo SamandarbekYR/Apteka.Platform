@@ -5,9 +5,9 @@ namespace DataAccesLayer.Interfaces;
 public interface IRepository<TEntity>
         where TEntity : BaseEntity
 {
-    int Add(TEntity entity);
-    int Update(TEntity entity);
-    int Remove(TEntity entity);
+    bool Add(TEntity entity);
+    bool Update(TEntity entity);
+    bool Remove(TEntity entity);
     TEntity? GetById(Guid id);
     IQueryable<TEntity> GetAll();
 }

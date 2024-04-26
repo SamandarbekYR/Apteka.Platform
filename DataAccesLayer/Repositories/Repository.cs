@@ -17,19 +17,21 @@ public class Repository<TEntity> : IRepository<TEntity>
         _dbSet = appDb.Set<TEntity>();
         _appDb = appDb;
     }
-    public int Add(TEntity entity)
+    public bool Add(TEntity entity)
     {
         _dbSet.Add(entity);
+        _appDb.SaveChanges();
 
-        return _appDb.SaveChanges();
+        return true;
     }
   
 
-    public int Remove(TEntity entity)
+    public bool Remove(TEntity entity)
     {
         _dbSet.Remove(entity);
-
-        return _appDb.SaveChanges();
+        _appDb.SaveChanges();
+        
+        return true;
     }
 
     public  IQueryable<TEntity> GetAll()
@@ -48,10 +50,11 @@ public class Repository<TEntity> : IRepository<TEntity>
         return entity;
     }
 
-    public int Update(TEntity entity)
+    public bool Update(TEntity entity)
     {
         _dbSet.Update(entity);
+        _appDb.SaveChanges();
 
-        return _appDb.SaveChanges();
+        return true;
     }
 }

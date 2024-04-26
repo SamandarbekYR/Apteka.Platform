@@ -16,20 +16,21 @@ public class UserRoleService : IUserRoleService
     {
         _dbSet = unitOfWork;
     }
-    public void Add(AddUserRoleDto userRole)
+    public bool Add(AddUserRoleDto userRole)
     {
         UserRole role = new UserRole();
         role.CreatedAt = DateTime.UtcNow;
         role.UpdatedAt = DateTime.UtcNow;
         role.RoleName = userRole.RoleName;
-        int result = _dbSet.UserRole.Add(role);
+        
+        bool result = _dbSet.UserRole.Add(role);
 
-        if (result == 0)
+        if (result is false)
         {
             throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydur xatolik yuz berdi");
         }
 
-        throw new CustomException(HttpStatusCode.Created, "So'rov muvafaqqiyatli amalga oshirildi");
+        return true;
     }
 
     public List<UserRole> GetAll()
@@ -40,7 +41,7 @@ public class UserRoleService : IUserRoleService
                               .ToList();
     }
 
-    public void Remove(Guid Id)
+    public bool Remove(Guid Id)
     {
         UserRole? userRole = _dbSet.UserRole.GetById(Id);
 
@@ -49,17 +50,17 @@ public class UserRoleService : IUserRoleService
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
         }
 
-        int result = _dbSet.UserRole.Remove(userRole);
+        bool result = _dbSet.UserRole.Remove(userRole);
 
-        if (result == 0)
+        if (result is false)
         {
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
         }
 
-        throw new CustomException(HttpStatusCode.OK, "So'rov muvafaqqiyatli amalga oshirildi");
+        return true;
     }
 
-    public void Update(AddUserRoleDto userRole, Guid Id)
+    public bool Update(AddUserRoleDto userRole, Guid Id)
     {
         UserRole? role = _dbSet.UserRole.GetById(Id);
 
@@ -68,13 +69,16 @@ public class UserRoleService : IUserRoleService
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
         }
 
-        int result = _dbSet.UserRole.Update(role);
+        role.RoleName = userRole.RoleName;
+        role.UpdatedAt = DateTime.UtcNow.AddHours(5);
 
-        if (result == 0)
+        bool result = _dbSet.UserRole.Update(role);
+
+        if (result is false)
         {
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
         }
 
-        throw new CustomException(HttpStatusCode.OK, "So'rov muvafaqqiyatli amalga oshirildi");
+        return true;
     }
 }
