@@ -22,10 +22,13 @@ public class UserController : ControllerBase
 
     [HttpPost]
     public IActionResult Add(AddUserDto userDto)
-    {
-        _userService.AddUser(userDto);
+    => Ok(_userService.AddUser(userDto));
 
-        return Ok();
-    }
+    [HttpDelete]
+    public IActionResult Remove(Guid Id)
+    => Ok(_userService.Remove(Id));
 
+    [HttpPut]
+    public IActionResult Update(UpdateUserDto userDto, Guid Id)
+    => Ok(_userService.Update(userDto, Id));
 }
