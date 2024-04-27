@@ -5,6 +5,8 @@ namespace BusinessLogicLayer.Interfaces.Users;
 
 public interface IUserService
 {
-    void AddUser(AddUserDto userDto);
+    bool AddUser(AddUserDto userDto);
+    bool Remove(Guid Id);
+    bool Update(UpdateUserDto userDto, Guid Id);
     List<UserView> GetAll();
 }
