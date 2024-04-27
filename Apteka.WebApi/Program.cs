@@ -1,7 +1,12 @@
+using AutoMapper;
+using BusinessLogicLayer.Commons.Mapper;
+using BusinessLogicLayer.Interfaces.Branches;
 using BusinessLogicLayer.Interfaces.Users;
+using BusinessLogicLayer.Services.Branches;
 using BusinessLogicLayer.Services.Users;
 using DataAccesLayer.Data;
 using DataAccesLayer.Interfaces;
+using DataAccesLayer.Interfaces.Branches;
 using DataAccesLayer.Interfaces.Users;
 using DataAccesLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +22,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMapper, Mapper>(); 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRoleService, UserRoleService>();
+builder.Services.AddTransient<IBranchService, BranchService>();
+
+builder.Services.AddAutoMapper(typeof(MapperProfile));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     var connection = builder.Configuration.GetConnectionString("DefaultConnection");

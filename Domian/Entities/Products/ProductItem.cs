@@ -1,5 +1,6 @@
 ﻿using Domian.Entities.Branchs;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Domian.Entities.Products;
 
@@ -21,5 +22,6 @@ public class ProductItem : Auditable
     public Product Product { get; set; } = new();
     [Column("branch_id")]
     public Guid BranchId { get; set; }
+    [JsonIgnore]
     public Branch Branch { get; set; } = new();
 }
