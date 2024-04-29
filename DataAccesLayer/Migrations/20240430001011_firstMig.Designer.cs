@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240425073740_first")]
-    partial class first
+    [Migration("20240430001011_firstMig")]
+    partial class firstMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -318,7 +318,7 @@ namespace DataAccesLayer.Migrations
                     b.HasOne("Domian.Entities.Categories.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -335,7 +335,7 @@ namespace DataAccesLayer.Migrations
                     b.HasOne("Domian.Entities.Products.Product", "Product")
                         .WithMany("ProductItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -348,7 +348,7 @@ namespace DataAccesLayer.Migrations
                     b.HasOne("Domian.Entities.Branchs.Branch", "Branch")
                         .WithMany("Receipts")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -359,13 +359,13 @@ namespace DataAccesLayer.Migrations
                     b.HasOne("Domian.Entities.Products.Product", "Product")
                         .WithMany("ReceiptItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domian.Entities.Receipts.Receipt", "Receipt")
                         .WithMany("ReceiptItems")
                         .HasForeignKey("ReceiptId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -378,7 +378,7 @@ namespace DataAccesLayer.Migrations
                     b.HasOne("Domian.Entities.Users.UserRole", "Role")
                         .WithMany("User")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Role");
