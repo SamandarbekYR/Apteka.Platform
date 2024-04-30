@@ -1,8 +1,10 @@
 using AutoMapper;
 using BusinessLogicLayer.Commons.Mapper;
 using BusinessLogicLayer.Interfaces.Branches;
+using BusinessLogicLayer.Interfaces.Receipts;
 using BusinessLogicLayer.Interfaces.Users;
 using BusinessLogicLayer.Services.Branches;
+using BusinessLogicLayer.Services.Receipts;
 using BusinessLogicLayer.Services.Users;
 using DataAccesLayer.Data;
 using DataAccesLayer.Interfaces;
@@ -26,6 +28,7 @@ builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IUserRoleService, UserRoleService>();
 builder.Services.AddTransient<IBranchService, BranchService>();
+builder.Services.AddTransient<IReceiptService, ReceiptService>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 

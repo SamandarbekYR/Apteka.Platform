@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.DTOs.Braches;
+using BusinessLogicLayer.DTOs.Receipts;
 using Domian.Entities.Branchs;
+using Domian.Entities.Receipts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ namespace BusinessLogicLayer.Commons.Mapper
         public MapperProfile()
         {
             CreateMap<Branch, AddBranchDto>().ReverseMap();
+            CreateMap<Receipt, AddReceiptDto>().ReverseMap();
         }
     }
 }
