@@ -74,6 +74,7 @@ namespace BusinessLogicLayer.Services.Receipts
             receipt.TotalPrice = dto.TotalPrice;
             receipt.TaxPrice = dto.TaxPrice;
             receipt.BranchId = dto.BranchId;
+            receipt.UpdatedAt = DateTime.UtcNow.AddHours(5);
 
             bool result = _dbSet.Receipt.Update(receipt);
             if(result is false)
