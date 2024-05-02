@@ -10,7 +10,7 @@ public class Receipt : Auditable
     [Column("branch_id")]
     public Guid BranchId { get; set; }
     [JsonIgnore]
-    public Branch Branch { get; set; } = new Branch();
+    public Branch? Branch { get; set; } 
     [Column("total_price")]
     public double TotalPrice { get; set; }
     [Column("tax_price")]
