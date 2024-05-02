@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 namespace DataAccesLayer.Interfaces.Receipts
 {
     public interface IReceipt : IRepository<Receipt> 
-    { }
+    {
+        List<Receipt> SelectAll();
+    }
 }
