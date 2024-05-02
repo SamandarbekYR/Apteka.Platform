@@ -27,7 +27,7 @@ namespace BusinessLogicLayer.Services.Receipts
         }
         public bool Add(AddReceiptDto dto)
         {
-            Receipt receipt = new Receipt();
+            Receipt receipt = new Receipt() { Branch = null };
             Receipt mapReceipt = _map.Map(dto,receipt);
             var result = _dbSet.Receipt.Add(mapReceipt);
 
