@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Commons.Exceptions;
 using BusinessLogicLayer.DTOs.Receipts;
 using BusinessLogicLayer.Interfaces.Receipts;
+using BusinessLogicLayer.Views.Receipts;
 using DataAccesLayer.Interfaces;
 using Domian.Entities.Receipts;
 using Microsoft.EntityFrameworkCore;
@@ -38,12 +39,11 @@ namespace BusinessLogicLayer.Services.Receipts
             return true;
         }
 
-        public List<Receipt> GetAll()
+        public List<ReceiptView> GetAll()
         {
-            return _dbSet.Receipt.GetAll()
-                .Include(x => x.ReceiptItems)
-                .AsNoTracking()
-                .ToList();
+            var receipt = _dbSet.Receipt.SelectAll();
+
+            return receipt.Select(c => (ReceiptView)c).ToList();
         }
 
         public bool Remove(Guid id)
