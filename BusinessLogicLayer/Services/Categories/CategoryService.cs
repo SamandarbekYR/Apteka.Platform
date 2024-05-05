@@ -31,9 +31,7 @@ public class CategoryService : ICategoryService
         var result = _dbSet.Category.Add(mapCategory);
 
         if (result is false)
-        {
             throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydur xatolik yuz berdi");
-        }
 
         return true;
     }
@@ -43,16 +41,12 @@ public class CategoryService : ICategoryService
         Category category = _dbSet.Category.GetById(Id);
 
         if(category is null)
-        {
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-        }
 
         var result = _dbSet.Category.Remove(category);
 
         if(result is false)
-        {
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
-        }
 
         return true;
     }
@@ -69,21 +63,15 @@ public class CategoryService : ICategoryService
     {
         Category category = _dbSet.Category.GetById(Id);
 
-        if(category is null)
-        {
+        if (category is null)
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-        }
 
-        category.CategoryName = dto.CategoryName;
-        category.Description = dto.Description;
-        category.CreatedAt = DateTime.UtcNow.AddHours(5);
+        category = _map.Map(dto,category);
 
         bool result = _dbSet.Category.Update(category);
 
-        if(result is false)
-        {
+        if (result is false)
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
-        }
 
         return true;
     }

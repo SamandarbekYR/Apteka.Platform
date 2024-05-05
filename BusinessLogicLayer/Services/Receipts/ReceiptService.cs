@@ -32,9 +32,7 @@ namespace BusinessLogicLayer.Services.Receipts
             var result = _dbSet.Receipt.Add(mapReceipt);
 
             if(result is false)
-            {
                 throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydir xatolik yuz berdi");
-            }
 
             return true;
         }
@@ -50,15 +48,11 @@ namespace BusinessLogicLayer.Services.Receipts
         {
             Receipt? receipt = _dbSet.Receipt.GetById(id);
             if(receipt is null)
-            {
                 throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-            }
 
             bool result = _dbSet.Receipt.Remove(receipt);
             if(result is false)
-            {
                 throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
-            }
 
             return true;
         }
@@ -67,20 +61,13 @@ namespace BusinessLogicLayer.Services.Receipts
         {
             Receipt receipt = _dbSet.Receipt.GetById(id);
             if(receipt is null)
-            {
                 throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-            }
 
-            receipt.TotalPrice = dto.TotalPrice;
-            receipt.TaxPrice = dto.TaxPrice;
-            receipt.BranchId = dto.BranchId;
-            receipt.UpdatedAt = DateTime.UtcNow.AddHours(5);
+            receipt = _map.Map(dto,receipt);
 
             bool result = _dbSet.Receipt.Update(receipt);
-            if(result is false)
-            {
+            if (result is false)
                 throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
-            }
 
             return true;
         }
