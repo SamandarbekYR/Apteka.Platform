@@ -19,11 +19,22 @@ namespace BusinessLogicLayer.Commons.Mapper
     {
         public MapperProfile()
         {
-            CreateMap<Branch, AddBranchDto>().ReverseMap();
-            CreateMap<Receipt, AddReceiptDto>().ReverseMap();
-            CreateMap<Category, AddCategoryDto>().ReverseMap();
-            CreateMap<Product, AddProductDto>().ReverseMap();
-            CreateMap<Product, UpdateProductDto>().ReverseMap();
+            CreateMap<Branch, AddBranchDto>().ReverseMap()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Branch, UpdateBranchDto>().ReverseMap()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Receipt, AddReceiptDto>().ReverseMap()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Receipt, UpdateReceiptDto>().ReverseMap()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Category, AddCategoryDto>().ReverseMap()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Category, UpdateCategoryDto>().ReverseMap()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Product, AddProductDto>().ReverseMap()
+                .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+            CreateMap<Product, UpdateProductDto>().ReverseMap()
+                .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
         }
     }
 }

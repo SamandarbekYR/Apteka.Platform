@@ -31,9 +31,7 @@ public class ProductService : IProductService
         var result = _dbSet.Product.Add(mapProduct);
 
         if (result is false)
-        {
             throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydir xatolik yuz berdi");
-        }
 
         return true;
     }
@@ -52,16 +50,12 @@ public class ProductService : IProductService
         var product = _dbSet.Product.GetById(Id);
 
         if(product is null)
-        {
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada mavjud yo'q");
-        }
 
         var result = _dbSet.Product.Remove(product);
 
         if (result is false)
-        {
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
-        }
 
         return true;
     }
@@ -70,19 +64,15 @@ public class ProductService : IProductService
     {
         Product product = _dbSet.Product.GetById(Id);
 
-        if(product is null)
-        {
-            throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-        }
+        if (product is null)
+            throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada mavjud yo'q");
 
         product = _map.Map(dto, product);
 
         var result = _dbSet.Product.Update(product);
 
-        if(result is false)
-        {
+        if (result is false)
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
-        }
 
         return true;
     }

@@ -33,9 +33,7 @@ namespace BusinessLogicLayer.Services.Branches
             var result = _dbSet.Branch.Add(mapBranch);
 
             if (result is false)
-            {
                 throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydur xatolik yuz berdi");
-            }
 
             return true;
         }
@@ -54,16 +52,12 @@ namespace BusinessLogicLayer.Services.Branches
             Branch? branch = _dbSet.Branch.GetById(Id);
 
             if (branch is null)
-            {
                 throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-            }
 
             bool result = _dbSet.Branch.Remove(branch);
 
             if (result is false)
-            {
                 throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
-            }
 
             return true;
         }
@@ -72,20 +66,15 @@ namespace BusinessLogicLayer.Services.Branches
         {
             Branch? branch = _dbSet.Branch.GetById(Id);
 
-            if (branch == null)
-            {
+            if (branch is null)
                 throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada yo'q");
-            }
 
-            branch.BranchName = dto.BranchName;
-            branch.UpdatedAt = DateTime.UtcNow.AddHours(5);
+            branch = _map.Map(dto,branch);
 
             bool result = _dbSet.Branch.Update(branch);
 
             if (result is false)
-            {
                 throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydur xatolik yuz berdi");
-            }
 
             return true;
         }
