@@ -8,6 +8,7 @@ namespace Apteka.WebApi.Controllers.Receipts;
 [ApiController]
 public class ReceiptItemController : ControllerBase
 {
+
     private IReceiptItemService _receiptItemService;
 
     public ReceiptItemController(IReceiptItemService receiptItemService)
