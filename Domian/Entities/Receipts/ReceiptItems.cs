@@ -8,10 +8,10 @@ public class ReceiptItems : Auditable
 {
     [Column("product_id")]
     public Guid ProductId { get; set; }
-    public Product Product { get; set; } = new();
+    public Product? Product { get; set; }
     [Column("receipt_id")]
     public Guid ReceiptId { get; set; }
-    public Receipt Receipt { get; set; } = new();
+    public Receipt? Receipt { get; set; }
     [Column("amount")]
     public int Amount { get; set; }
 }
