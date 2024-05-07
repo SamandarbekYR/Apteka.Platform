@@ -1,4 +1,3 @@
-using AutoMapper;
 using BusinessLogicLayer.Commons.Mapper;
 using BusinessLogicLayer.Interfaces.Branches;
 using BusinessLogicLayer.Interfaces.Categories;
@@ -12,13 +11,9 @@ using BusinessLogicLayer.Services.Receipts;
 using BusinessLogicLayer.Services.Users;
 using DataAccesLayer.Data;
 using DataAccesLayer.Interfaces;
-using DataAccesLayer.Interfaces.Branches;
-using DataAccesLayer.Interfaces.Users;
 using DataAccesLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
+using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -38,6 +33,12 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IReceiptItemService, ReceiptItemService>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+builder.Services.AddControllers()
+           .AddNewtonsoftJson(options =>
+           {
+               options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+           });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
