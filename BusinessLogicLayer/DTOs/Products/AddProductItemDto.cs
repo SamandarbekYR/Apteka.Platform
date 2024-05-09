@@ -1,7 +1,11 @@
-﻿namespace BusinessLogicLayer.DTOs.Products;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BusinessLogicLayer.DTOs.Products;
 
 public class AddProductItemDto
 {
+    public DateTime ManifacturedDate { get; set; }
+    public DateTime ExpiredDate { get; set; }
     public double Price { get; set; }
     public long Amount { get; set; }
     public int AmountPerCollection { get; set; }

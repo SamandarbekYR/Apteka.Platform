@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace BusinessLogicLayer.DTOs.Products;
+﻿namespace BusinessLogicLayer.DTOs.Products;
 
 public class UpdateProductItemDto
 {
+    public DateTime ManifacturedDate { get; set; }
+    public DateTime ExpiredDate { get; set; }
     public double Price { get; set; }
     public long Amount { get; set; }
     public int AmountPerCollection { get; set; }
