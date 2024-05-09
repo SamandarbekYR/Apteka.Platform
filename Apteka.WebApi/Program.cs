@@ -31,6 +31,7 @@ builder.Services.AddTransient<IReceiptService, ReceiptService>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IReceiptItemService, ReceiptItemService>();
+builder.Services.AddTransient<IProductItemService, ProductItemService>();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
 

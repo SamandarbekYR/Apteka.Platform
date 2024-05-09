@@ -5,54 +5,46 @@ using BusinessLogicLayer.Interfaces.Products;
 using DataAccesLayer.Interfaces;
 using Domian.Entities.Products;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Services.Products;
 
-public class ProductService : IProductService
+public class ProductItemService : IProductItemService
 {
     private IUnitOfWork _dbSet;
     private IMapper _map;
-    public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+
+    public ProductItemService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _dbSet = unitOfWork;
         _map = mapper;
     }
-    public bool Add(AddProductDto dto)
+    public bool Add(AddProductItemDto dto)
     {
-        Product product = new Product() { Category = null};
-        Product mapProduct = _map.Map(dto, product);
+        ProductItem productItem = new ProductItem() { Product = null,Branch = null};
+        productItem = _map.Map(dto, productItem);
 
-        var result = _dbSet.Product.Add(mapProduct);
-
+        var result = _dbSet.ProductItem.Add(productItem);
         if (result is false)
             throw new CustomException(HttpStatusCode.BadRequest, "Ma'lumot to'ldirishda qandaydir xatolik yuz berdi");
 
         return true;
     }
 
-    public List<Product> GetAll()
+    public List<ProductItem> GetAll()
     {
-        return(_dbSet.Product.GetAll()
-            .Include(c => c.ProductItems)
-            .Include(c => c.ReceiptItems)
-            .AsNoTracking()
-            .ToList());
+        return _dbSet.ProductItem.GetAll()
+            .AsNoTracking().ToList();
     }
 
     public bool Remove(Guid Id)
     {
-        var product = _dbSet.Product.GetById(Id);
+        ProductItem productItem = _dbSet.ProductItem.GetById(Id);
 
-        if(product is null)
+        if (productItem is null)
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada mavjud yo'q");
 
-        var result = _dbSet.Product.Remove(product);
+        var result = _dbSet.ProductItem.Remove(productItem);
 
         if (result is false)
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
@@ -60,16 +52,15 @@ public class ProductService : IProductService
         return true;
     }
 
-    public bool Update(UpdateProductDto dto, Guid Id)
+    public bool Update(UpdateProductItemDto dto, Guid Id)
     {
-        Product product = _dbSet.Product.GetById(Id);
+        ProductItem productItem = _dbSet.ProductItem.GetById(Id);
 
-        if (product is null)
+        if (productItem is null)
             throw new CustomException(HttpStatusCode.NotFound, "Siz bergan Id bazada mavjud yo'q");
 
-        product = _map.Map(dto, product);
-
-        var result = _dbSet.Product.Update(product);
+        productItem = _map.Map(dto,productItem);
+        var result = _dbSet.ProductItem.Update(productItem);
 
         if (result is false)
             throw new CustomException(HttpStatusCode.InternalServerError, "Tizimda qandaydir xatolik yuz berdi");
