@@ -30,6 +30,10 @@ public class MapperProfile : Profile
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<Product, UpdateProductDto>().ReverseMap()
             .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+        CreateMap<ProductItem, AddProductItemDto>().ReverseMap()
+            .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
+        CreateMap<ProductItem, UpdateProductItemDto>().ReverseMap()
+            .ForMember(dest => dest.UpdatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<ReceiptItems, AddReceiptItemDto>().ReverseMap()
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => DateTime.UtcNow));
         CreateMap<ReceiptItems, UpdateReceiptItemDto>().ReverseMap()
